@@ -1,0 +1,5 @@
+com\asd\logic\Vertex.class
+com\asd\repository\MapsApi.class
+com\asd\logic\MST.class
+com\asd\view\MainMenu.class
+com\asd\App.class

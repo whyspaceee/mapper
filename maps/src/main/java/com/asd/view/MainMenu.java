@@ -7,10 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import com.asd.logic.*;
 import com.asd.repository.MapsApi;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import javax.imageio.ImageIO;
-import java.io.File;
 
 public class MainMenu extends JFrame implements ActionListener {
 
@@ -35,16 +31,10 @@ public class MainMenu extends JFrame implements ActionListener {
         button = new JButton("Submit");
         button.addActionListener(this);
         textFields = new JTextField[5];
-        textFields[0] = new JTextField();
-        for (int i = 1; i < 5; i++) {
+        for (int i = 0; i < 5; i++) {
             textFields[i] = new JTextField();
+            textFields[i].setPreferredSize(new Dimension(250, 40));
         }
-
-        textFields[0].setPreferredSize(new Dimension(250, 40));
-        textFields[1].setPreferredSize(new Dimension(250, 40));
-        textFields[2].setPreferredSize(new Dimension(250, 40));
-        textFields[3].setPreferredSize(new Dimension(250, 40));
-        textFields[4].setPreferredSize(new Dimension(250, 40));
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

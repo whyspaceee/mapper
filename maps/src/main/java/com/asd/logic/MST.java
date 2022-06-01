@@ -1,12 +1,6 @@
 package com.asd.logic;
 
-import java.util.Comparator;
-import java.util.Queue;
-
 import com.asd.repository.MapsApi;
-
-import java.util.LinkedList;
-import java.util.Map;
 
 public class MST {
     int N;
@@ -14,16 +8,28 @@ public class MST {
     Vertex vertex[];
     long adjMatrixArray[][];
     boolean connected[][];
-    long totalCost = 0;
     Vertex currentVertex;
 
     public MST(MapsApi api) {
         this.api = api;
     }
 
+    public void create(String[] places) {
+        this.N = places.length;
+        this.vertex = new Vertex[N];
+        this.adjMatrixArray = new long[N][N];
+        this.connected = new boolean[N][N];
+        for (int i = 0; i < N; i++) {
+            this.vertex[i] = new Vertex(i, places[i]);
+        }
+        createMatrix();
+    }
+
     private void createMatrix() {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
+                if (i == j)
+                    continue;
                 System.out.println(vertex[i].placeName + " " + vertex[j].placeName);
                 System.out.println(api.getWeight(vertex[i].placeName, vertex[j].placeName));
                 adjMatrixArray[i][j] = api.getWeight(vertex[i].placeName, vertex[j].placeName);
@@ -31,18 +37,8 @@ public class MST {
         }
     }
 
-    public void create(String[] places) {
-        this.N = places.length;
-        vertex = new Vertex[N];
-        adjMatrixArray = new long[N][N];
-        connected = new boolean[N][N];
-        for (int i = 0; i < N; i++) {
-            vertex[i] = new Vertex(i, places[i]);
-        }
-        createMatrix();
-    }
-
     public long Prim(int start) {
+        long totalCost = 0;
         vertex[start].key = 0;
         vertex[start].parent = null;
 
@@ -86,7 +82,7 @@ public class MST {
     }
 
     public String getPath() {
-        Vertex curVertex = null;
+        Vertex curVertex = vertex[N - 1];
         for (int i = 0; i < N; i++) {
             if (findNumOfChild(vertex[i]) == N) {
                 curVertex = vertex[i];

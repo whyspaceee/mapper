@@ -69,15 +69,26 @@
             <goals>
               <goal>shade</goal>
             </goals>
-            <configuration>
-              <transformers>
-                <transformer>
-                  <mainClass>com.asd.App</mainClass>
-                </transformer>
-              </transformers>
-            </configuration>
           </execution>
         </executions>
+        <configuration>
+          <filters>
+            <filter>
+              <artifact>*:*</artifact>
+              <excludes>
+                <exclude>module-info.class</exclude>
+                <exclude>META-INF/*.SF</exclude>
+                <exclude>META-INF/*.DSA</exclude>
+                <exclude>META-INF/*.RSA</exclude>
+              </excludes>
+            </filter>
+          </filters>
+          <transformers>
+            <transformer>
+              <mainClass>com.asd.App</mainClass>
+            </transformer>
+          </transformers>
+        </configuration>
       </plugin>
     </plugins>
   </build>
